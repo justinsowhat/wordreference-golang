@@ -94,11 +94,11 @@ func parseTranslationEntry(entry structs.TranslationEntry, node *goquery.Selecti
 }
 
 func setTranslationsByHeader(header string, result structs.SearchResult, translations []structs.TranslationEntry) structs.SearchResult {
-	if header == PRINCIPAL_TRANSLATIONS {
+	if header == PRINCIPAL_TRANSLATIONS && result.PrincipalTranslations == nil {
 		result.PrincipalTranslations = translations
-	} else if header == ADDITIONAL_TRANSLATION {
+	} else if header == ADDITIONAL_TRANSLATION && result.AdditionalTranslations == nil {
 		result.AdditionalTranslations = translations
-	} else if header == COMPOUND_FORMS {
+	} else if header == COMPOUND_FORMS && result.CompoundForms == nil {
 		result.CompoundForms = translations
 	}
 	return result
