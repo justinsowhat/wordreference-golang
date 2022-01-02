@@ -14,6 +14,10 @@ const COMPOUND_FORMS = "Compound Forms"
 
 func Parse(responseBody io.Reader) structs.SearchResult {
 
+	if responseBody == nil {
+		return structs.SearchResult{}
+	}
+
 	// Load the HTML document
 	doc, err := goquery.NewDocumentFromReader(responseBody)
 	if err != nil {
