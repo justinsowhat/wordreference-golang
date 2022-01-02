@@ -8,12 +8,12 @@ package main
 import (
 	"fmt"
 
-	"github.com/justinsowhat/wordreference-golang/client"
+	wd "github.com/justinsowhat/wordreference-golang"
 )
 
 func main() {
 
-	client := client.WordReferenceClient{
+	client := wd.client.WordReferenceClient{
 		Dict: "fren",
 	}
 
