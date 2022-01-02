@@ -2,7 +2,6 @@ package WordReferenceClient
 
 import (
 	"bytes"
-	"fmt"
 	"io"
 	"log"
 	"net/http"
@@ -19,9 +18,55 @@ type WordReferenceClient struct {
 	Dict string
 }
 
+// context path for available bidirectional dictionaries
+const (
+	ENGLISH_SPANISH   string = "es/translation.asp?tranword="
+	SPANISH_ENGLISH          = "es/en/translation.asp?spen="
+	SPANISH_FRENCH           = "esfr/"
+	SPANISH_ITALIAN          = "esit/"
+	SPANISH_GERMAN           = "esde/"
+	SPANISH_PORTUGESE        = "espt/"
+	ENGLISH_FRENCH           = "enfr/"
+	FRENCH_ENGLISH           = "fren/"
+	FRENCH_SPANISH           = "fres/"
+	ITALIAN_ENGLISH          = "iten/"
+	ENGLISH_ITALIAN          = "enit/"
+	ITALIAN_SPANISH          = "ites/"
+	ENGLISH_GERMAN           = "ende/"
+	GERMAN_ENGLISH           = "deen/"
+	GERMAN_SPANISH           = "dees/"
+	ENGLISH_DUTCH            = "enhl/"
+	DUTCH_ENGLISH            = "hlen/"
+	ENGLISH_SWEDISH          = "ensv/"
+	SWEDISH_ENGLISH          = "sven/"
+	ENGLISH_RUSSIAN          = "enru/"
+	RUSSIAN_ENGLISH          = "ruen/"
+	ENGLISH_PORTUGESE        = "enpt/"
+	PORTUGESE_ENGLISH        = "pten/"
+	PORTUGESE_SPANISH        = "ptes/"
+	ENGLISH_POLISH           = "enpl/"
+	POLISH_ENGLISH           = "plen/"
+	ENGLISH_ROMANIAN         = "enro/"
+	ROMANIAN_ENGLISH         = "roen/"
+	ENGLISH_CZECH            = "encz/"
+	CZECH_ENGLISH            = "czen/"
+	ENGLISH_GREEK            = "engr/"
+	GREEK_ENGLISH            = "gren/"
+	ENGLISH_TURKISH          = "entr/"
+	TURKISH_ENGLISH          = "tren/"
+	ENGLISH_CHINESE          = "enzh/"
+	CHINESE_ENGLISH          = "zhen/"
+	ENGLISH_JAPANESE         = "enja/"
+	JAPANESE_ENGLISH         = "jaen/"
+	ENGLISH_KOREAN           = "enko/"
+	KOREAN_ENGLISH           = "koen/"
+	ENGLISH_ARABIC           = "enar/"
+	ARABIC_ENGLISH           = "aren/"
+	ENGLISH_ICELANDIC        = "enis/"
+)
+
 func (client WordReferenceClient) sendGetRequest(entry string) io.ReadCloser {
-	url := clientUrl + client.Dict + "/" + escapeSpaces(entry)
-	fmt.Println(url)
+	url := clientUrl + client.Dict + escapeSpaces(entry)
 
 	responseBody := bytes.NewBufferString("")
 
