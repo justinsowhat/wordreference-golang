@@ -1,6 +1,5 @@
 [![Go](https://github.com/justinsowhat/wordreference-golang/actions/workflows/go.yml/badge.svg?branch=main)](https://github.com/justinsowhat/wordreference-golang/actions/workflows/go.yml)
-[![Go Reference](https://pkg.go.dev/github.com/justinsowhat/wordreference-golang.svg)](https://pkg.go.dev/github.com/justinsowhat/wordreference-golang)
-
+[![Go Reference](https://pkg.go.dev/badge/github.com/justinsowhat/wordreference-golang.svg)](https://pkg.go.dev/github.com/justinsowhat/wordreference-golang)
 
 # Golang Word Reference Package
 This is a simple Golang package used to look up words and examples against WordRerefence
