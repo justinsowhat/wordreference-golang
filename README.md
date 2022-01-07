@@ -85,4 +85,4 @@ These are the list of supported dictionaries on WordReference. Please note, not 
 
 
 ## License
-The MIT license is here[https://github.com/justinsowhat/wordreference-golang/blob/main/LICENSE].
+The MIT license is [here](https://github.com/justinsowhat/wordreference-golang/blob/main/LICENSE).
