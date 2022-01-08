@@ -1,19 +1,23 @@
 package structs
 
 type SearchResult struct {
-	IPA                    string
-	PrincipalTranslations  []TranslationEntry
-	AdditionalTranslations []TranslationEntry
-	CompoundForms          []TranslationEntry
+	IPA               string             `json:"ipa"`
+	TranslationGroups []TranslationGroup `json:"translationGroups"`
+}
+
+type TranslationGroup struct {
+	Title        string             `json:"title"`
+	Translations []TranslationEntry `json:"translations"`
 }
 
 type TranslationEntry struct {
-	FromWord    string
-	FromType    string
-	ToWord      string
-	ToType      string
-	FromExample []string
-	ToExample   []string
+	Id          string   `json:"id"`
+	FromWord    string   `json:"fromWord"`
+	FromType    string   `json:"fromType"`
+	ToWord      string   `json:"toWord"`
+	ToType      string   `json:"toType"`
+	FromExample []string `json:"fromExample"`
+	ToExample   []string `json:"toExample"`
 }
 
 func (entry *TranslationEntry) AddFromExample(example string) {
