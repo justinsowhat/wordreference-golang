@@ -66,7 +66,7 @@ const (
 )
 
 func (client WordReferenceClient) sendGetRequest(entry string) io.ReadCloser {
-	url := clientUrl + client.Dict + escapeSpaces(entry)
+	url := clientUrl + client.Dict + client.escapeSpaces(entry)
 
 	responseBody := bytes.NewBufferString("")
 
@@ -80,11 +80,11 @@ func (client WordReferenceClient) sendGetRequest(entry string) io.ReadCloser {
 
 func (client WordReferenceClient) LookUpWord(entry string) s.SearchResult {
 	html := client.sendGetRequest(entry)
-
-	return utils.Parse(html)
+	parser := utils.Parser{}
+	return parser.Parse(html)
 }
 
-func escapeSpaces(entry string) string {
+func (client WordReferenceClient) escapeSpaces(entry string) string {
 	pattern := regexp.MustCompile(`\+`)
 	return pattern.ReplaceAllString(url.QueryEscape(entry), "%20")
 }

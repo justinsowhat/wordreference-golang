@@ -12,7 +12,8 @@ func TestParseHappyPath(t *testing.T) {
 
 	file, _ := os.Open("./testData/subir.html")
 
-	actual := utils.Parse(file)
+	parser := utils.Parser{}
+	actual := parser.Parse(file)
 
 	expectedIPA := "[sybiʀ]"
 
@@ -20,38 +21,43 @@ func TestParseHappyPath(t *testing.T) {
 		t.Fatalf("The actual IPA is not missing or incorrect: %s", actual.IPA)
 	}
 
-	if actual.PrincipalTranslations == nil {
-		t.Fatal("The actual principal translations are missing")
+	if len(actual.TranslationGroups) == 0 {
+		t.Fatal("There's no translation groups are missing")
 	}
 
-	if actual.AdditionalTranslations == nil {
-		t.Fatal("The actual additional translations are missing")
-	}
+	for _, group := range actual.TranslationGroups {
+		if group.Title == utils.PRINCIPAL_TRANSLATIONS {
+			if len(group.Translations) == 0 {
+				t.Fatal("The actual principal translations are missing")
+			}
+		}
 
-	if actual.CompoundForms == nil {
-		t.Fatal("The actual compound forms are missing")
+		if group.Title == utils.ADDITIONAL_TRANSLATION {
+			if len(group.Translations) == 0 {
+				t.Fatal("The actual additional translations are missing")
+			}
+		}
+
+		if group.Title == utils.COMPOUND_FORMS {
+			if len(group.Translations) == 0 {
+				t.Fatal("The actual compound forms are missing")
+			}
+		}
 	}
 
 }
 
 func TestParseNilResponseBody(t *testing.T) {
 
-	actual := utils.Parse(nil)
+	parser := utils.Parser{}
+	actual := parser.Parse(nil)
 
 	if actual.IPA != "" {
 		t.Fatalf("The actual result should not have an IPA!")
 	}
 
-	if actual.PrincipalTranslations != nil {
-		t.Fatal("The actual result should not have principal translations!")
-	}
-
-	if actual.AdditionalTranslations != nil {
-		t.Fatal("The actual result should not have additional translations!")
-	}
-
-	if actual.CompoundForms != nil {
-		t.Fatal("The actual result should not have compound forms!")
+	if len(actual.TranslationGroups) != 0 {
+		t.Fatal("The actual result should not have translations!")
 	}
 
 }
@@ -60,22 +66,15 @@ func TestParseEmptyHtml(t *testing.T) {
 
 	file, _ := os.Open("./testData/empty.html")
 
-	actual := utils.Parse(file)
+	parser := utils.Parser{}
+	actual := parser.Parse(file)
 
 	if actual.IPA != "" {
 		t.Fatalf("The actual result should not have an IPA!")
 	}
 
-	if actual.PrincipalTranslations != nil {
-		t.Fatal("The actual result should not have principal translations!")
-	}
-
-	if actual.AdditionalTranslations != nil {
-		t.Fatal("The actual result should not have additional translations!")
-	}
-
-	if actual.CompoundForms != nil {
-		t.Fatal("The actual result should not have compound forms!")
+	if len(actual.TranslationGroups) != 0 {
+		t.Fatal("The actual result should not have translations!")
 	}
 
 }

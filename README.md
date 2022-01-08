@@ -28,9 +28,7 @@ func main() {
 	result := client.LookUpWord("subir")
 
 	fmt.Printf("IPA: %s\n", result.IPA)
-	fmt.Printf("Principal Translations: %s\n", result.PrincipalTranslations)
-	fmt.Printf("Additional Translations: %s\n", result.AdditionalTranslations)
-	fmt.Printf("Compound Forms: %s\n", result.CompoundForms)
+	fmt.Printf("Principal Translations: %s\n", result.TranslationGroups)
 
 }
 ```
